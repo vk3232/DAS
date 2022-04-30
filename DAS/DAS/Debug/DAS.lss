@@ -5,31 +5,31 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .text         000008a8  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000002e  00800060  000008a8  0000091c  2**0
+  1 .data         0000002c  00800060  000008a8  0000091c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .stab         00000f9c  00000000  00000000  0000094c  2**2
+  2 .stab         00000f9c  00000000  00000000  00000948  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000251  00000000  00000000  000018e8  2**0
+  3 .stabstr      00000251  00000000  00000000  000018e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_aranges 00000080  00000000  00000000  00001b39  2**0
+  4 .debug_aranges 00000080  00000000  00000000  00001b35  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_pubnames 000000e9  00000000  00000000  00001bb9  2**0
+  5 .debug_pubnames 000000e9  00000000  00000000  00001bb5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000999  00000000  00000000  00001ca2  2**0
+  6 .debug_info   00000999  00000000  00000000  00001c9e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000004b1  00000000  00000000  0000263b  2**0
+  7 .debug_abbrev 000004b1  00000000  00000000  00002637  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d52  00000000  00000000  00002aec  2**0
+  8 .debug_line   00000d52  00000000  00000000  00002ae8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000100  00000000  00000000  00003840  2**2
+  9 .debug_frame  00000100  00000000  00000000  0000383c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000326  00000000  00000000  00003940  2**0
+ 10 .debug_str    00000326  00000000  00000000  0000393c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000007b9  00000000  00000000  00003c66  2**0
+ 11 .debug_loc    000007b9  00000000  00000000  00003c62  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_pubtypes 000000fc  00000000  00000000  0000441f  2**0
+ 12 .debug_pubtypes 000000fc  00000000  00000000  0000441b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000048  00000000  00000000  0000451b  2**0
+ 13 .debug_ranges 00000048  00000000  00000000  00004517  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -74,7 +74,7 @@ Disassembly of section .text:
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	ae 38       	cpi	r26, 0x8E	; 142
+  70:	ac 38       	cpi	r26, 0x8C	; 140
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
   76:	0e 94 af 00 	call	0x15e	; 0x15e <main>
@@ -323,7 +323,7 @@ int main(void)
     while(1)
     {
         LCD_clear();
-		sprintf(Msg,"MOISTURE: %f",getVal(PT100));
+		sprintf(Msg,"TEMPERATURE: %d",getVal(PT100));
  192:	8e 01       	movw	r16, r28
  194:	0f 5f       	subi	r16, 0xFF	; 255
  196:	1f 4f       	sbci	r17, 0xFF	; 255
@@ -334,9 +334,9 @@ int main(void)
  1a0:	ff 2e       	mov	r15, r31
  1a2:	f0 2d       	mov	r31, r0
 		LCD_Message(1,0,Msg);
-		sprintf(Msg,"TEMPERATURE: %d",getVal(WEIGHT));
+		sprintf(Msg,"WEIGHT: %d",getVal(WEIGHT));
  1a4:	0f 2e       	mov	r0, r31
- 1a6:	fd e7       	ldi	r31, 0x7D	; 125
+ 1a6:	f0 e8       	ldi	r31, 0x80	; 128
  1a8:	cf 2e       	mov	r12, r31
  1aa:	f0 e0       	ldi	r31, 0x00	; 0
  1ac:	df 2e       	mov	r13, r31
@@ -348,7 +348,7 @@ int main(void)
     {
         LCD_clear();
  1b0:	0e 94 6b 00 	call	0xd6	; 0xd6 <LCD_clear>
-		sprintf(Msg,"MOISTURE: %f",getVal(PT100));
+		sprintf(Msg,"TEMPERATURE: %d",getVal(PT100));
  1b4:	80 e0       	ldi	r24, 0x00	; 0
  1b6:	0e 94 9b 00 	call	0x136	; 0x136 <getVal>
  1ba:	2d b7       	in	r18, 0x3d	; 61
@@ -390,7 +390,7 @@ int main(void)
  202:	60 e0       	ldi	r22, 0x00	; 0
  204:	a8 01       	movw	r20, r16
  206:	0e 94 6f 00 	call	0xde	; 0xde <LCD_Message>
-		sprintf(Msg,"TEMPERATURE: %d",getVal(WEIGHT));
+		sprintf(Msg,"WEIGHT: %d",getVal(WEIGHT));
  20a:	81 e0       	ldi	r24, 0x01	; 1
  20c:	0e 94 9b 00 	call	0x136	; 0x136 <getVal>
  210:	ad b7       	in	r26, 0x3d	; 61
