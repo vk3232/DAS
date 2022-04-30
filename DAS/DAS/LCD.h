@@ -15,9 +15,7 @@ unsigned int analogRead(uint8_t channel){
 	 return ADCW; 
 }
 
-float getPt(uint8_t channel)
+float getVal(uint8_t channel)
 {
-	int v = 5.0*(analogRead(channel)/1023.0);
-	float Rx = v*79.489+14.187;
-	return (Rx/100.0)/0.0385;
+	return analogRead(channel)*5000/1024;
 }
